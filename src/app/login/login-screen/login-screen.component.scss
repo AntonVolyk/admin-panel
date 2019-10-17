@@ -1,0 +1,13 @@
+$errorColor: #dc3545;
+
+:host {
+  .invalid-control {
+    font-size: 12px;
+    color: $errorColor;
+  }
+
+  .form-control.ng-touched.ng-invalid {
+    border-color: $errorColor;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+  }
+}

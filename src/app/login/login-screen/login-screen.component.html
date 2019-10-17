@@ -1,1 +1,25 @@
-<p>login-screen works!</p>
+<div class="d-flex flex-column justify-content-center align-items-center h-100">
+  <div *ngIf="loginErrorMessage" class="alert alert-danger w-25">{{loginErrorMessage}}</div>
+  <form [formGroup]="loginForm" class="w-25" (submit)="onSubmit()">
+    <div class="form-group" >
+      <label for="username">Username</label>
+      <input id="username" type="text" class="form-control form-control-lg" formControlName="username" >
+      <ng-container *ngIf="(username.dirty || username.touched)">
+        <span *ngIf="username.hasError('required')" class="invalid-control">Username is required</span>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" class="form-control form-control-lg" formControlName="password">
+      <ng-container *ngIf="(password.dirty || password.touched)">
+        <span *ngIf="password.hasError('required')" class="invalid-control">Password is required</span>
+      </ng-container>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="isPending">
+      <span *ngIf="isPending" class="spinner-border spinner-border-sm"></span>
+      Login
+    </button>
+  </form>
+</div>
+
+
