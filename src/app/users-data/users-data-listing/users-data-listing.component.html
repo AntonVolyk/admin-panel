@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<div class="d-flex flex-column h-100 align-items-center">
+  <div class="d-flex justify-content-between bg-light mt-5 w-75">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="isUsersTabSelected" (click)="onUsersNavigation()">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="isPostsTabSelected" (click)="onPostsNavigation()">Posts</a>
+      </li>
+    </ul>
+    <button type="button" class="btn" (click)="onSignOut()">Sign out</button>
+  </div>
+  <div class="bg-light mt-5 mb-5 w-75">
+    <input type="text" class="form-control" placeholder="Search" (input)="onQuickFilterChanged($event)">
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
+
+

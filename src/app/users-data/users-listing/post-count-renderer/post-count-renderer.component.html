@@ -1,0 +1,4 @@
+<span *ngIf="params.data.postCount; else spinner">{{params.data.postCount}}</span>
+<ng-template #spinner>
+  <span class="spinner-border spinner-border-sm"></span>
+</ng-template>

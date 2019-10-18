@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '@shared/services/login.service';
+import {AuthenticationService} from '@shared/services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
@@ -20,7 +20,7 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private loginService: LoginService
+    private authenticationService: AuthenticationService
   ) {
   }
 
@@ -45,7 +45,7 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
   }
 
   private login(): Subscription {
-    return this.loginService.login(this.loginForm.value.username, this.loginForm.value.password)
+    return this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe(
         response => {
           this.router.navigate([this.userUrl]);

@@ -1,1 +1,12 @@
-<p>users-listing works!</p>
+<div class="d-flex flex-column align-items-center h-100">
+  <div class="h-100 w-75">
+    <ag-grid-angular
+      class="ag-theme-balham"
+      [pagination]="true"
+      [defaultColDef]= "defaultColDef"
+      [columnDefs]="columnDefs"
+      (gridReady)="onGreadReady($event)"
+    >
+    </ag-grid-angular>
+  </div>
+</div>

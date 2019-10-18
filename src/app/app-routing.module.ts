@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./users-data/users-data.module').then(mod => mod.UsersDataModule),
     canActivate: [AuthGuard]
   },
-  { path: '',   redirectTo: '/users-data', pathMatch: 'full'  },
+  { path: '',   redirectTo: '/users-data', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {LoginService} from './services/login.service';
+import {AuthenticationService} from './services/authentication.service';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
     HttpClientModule
   ],
-  providers: [LoginService]
+  providers: [AuthenticationService]
 })
 export class SharedModule {
 

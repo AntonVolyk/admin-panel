@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   jsonPlaceholder: 'https://jsonplaceholder.typicode.com',
-  authService: 'http://localhost:4200'
+  authService: 'http://auth-service'
 };
 
 /*
