@@ -5,6 +5,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SharedModule} from './shared/shared.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FakeTokenInterceptor} from './services/fake-token.interceptor';
+import {ErrorInterceptor} from './services/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,18 @@ import {SharedModule} from './shared/shared.module';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FakeTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
