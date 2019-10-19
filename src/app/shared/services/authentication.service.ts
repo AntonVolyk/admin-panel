@@ -20,6 +20,7 @@ export class AuthenticationService {
     return this.http.post<any>(`${environment.authService}/admin-panel/login`, {username, password})
       .pipe(map(data => {
         localStorage.setItem('user', JSON.stringify(data));
+        this.user = data;
         return data;
       }));
   }

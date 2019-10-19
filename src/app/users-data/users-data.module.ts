@@ -11,7 +11,14 @@ import {UsersDataService} from './services/users-data.service';
 import { PostCountRendererComponent } from './users-listing/post-count-renderer/post-count-renderer.component';
 
 @NgModule({
-  declarations: [UsersDataListingComponent, UsersListingComponent, PostsListingComponent, UserDetailComponent, PostDetailComponent, PostCountRendererComponent],
+  declarations: [
+    UsersDataListingComponent,
+    UsersListingComponent,
+    PostsListingComponent,
+    UserDetailComponent,
+    PostDetailComponent,
+    PostCountRendererComponent
+  ],
   imports: [
     CommonModule,
     UsersDataRoutingModule,

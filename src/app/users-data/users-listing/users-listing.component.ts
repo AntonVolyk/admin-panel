@@ -23,10 +23,6 @@ export class UsersListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usersDataService.getUsers().then(users => {
-      this.users = users;
-      this.params.api.setRowData(users);
-    });
     this.columnDefs = this.initColumnDefs();
     this.subscription.add(this.setQuickFilterValue());
   }
@@ -34,6 +30,10 @@ export class UsersListingComponent implements OnInit {
   onGreadReady(params) {
     this.params = params;
     this.params.api.sizeColumnsToFit();
+    this.usersDataService.getUsers().then(users => {
+      this.users = users;
+      this.params.api.setRowData(users);
+    });
   }
 
   private initColumnDefs(): any[] {

@@ -45,7 +45,8 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
   }
 
   private login(): Subscription {
-    return this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password)
+    const {username, password} = this.loginForm.value;
+    return this.authenticationService.login(username, password)
       .subscribe(
         response => {
           this.router.navigate([this.userUrl]);
