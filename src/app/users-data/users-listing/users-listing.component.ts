@@ -36,6 +36,10 @@ export class UsersListingComponent implements OnInit {
     });
   }
 
+  onGridSizeChanged(params) {
+    params.api.sizeColumnsToFit();
+  }
+
   private initColumnDefs(): any[] {
     return [
       {headerName: 'ID', field: 'id', width: 40, sortable: false},

@@ -5,6 +5,7 @@
       [pagination]="true"
       [defaultColDef]= "defaultColDef"
       [columnDefs]="columnDefs"
+      (gridSizeChanged)="onGridSizeChanged($event)"
       (gridReady)="onGreadReady($event)"
     >
     </ag-grid-angular>
