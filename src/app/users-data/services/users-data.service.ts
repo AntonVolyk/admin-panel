@@ -18,4 +18,8 @@ export class UsersDataService {
   getUsersPostsById(userId: number): Promise<Post[]> {
     return this.http.get<Post[]>(`${environment.jsonPlaceholder}/users/${userId}/posts`).toPromise();
   }
+
+  getPosts(): Promise<Post[]> {
+    return this.http.get<Post[]>(`${environment.jsonPlaceholder}/posts`).toPromise();
+  }
 }

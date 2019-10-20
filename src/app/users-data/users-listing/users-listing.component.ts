@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersDataService} from '../services/users-data.service';
 import {User} from '@shared/models/user';
-import {PostCountRendererComponent} from './post-count-renderer/post-count-renderer.component';
-import {Subscription} from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-users-listing',
@@ -18,9 +17,9 @@ export class UsersListingComponent implements OnInit {
     sortable: true,
     resizable: true
   };
+  data$ = new BehaviorSubject(null);
 
-  constructor(private usersDataService: UsersDataService) {
-  }
+  constructor(private usersDataService: UsersDataService) {}
 
   ngOnInit() {
     this.columnDefs = this.initColumnDefs();
@@ -30,8 +29,9 @@ export class UsersListingComponent implements OnInit {
   onGreadReady(params) {
     this.params = params;
     this.params.api.sizeColumnsToFit();
-    this.usersDataService.getUsers().then(users => {
+    this.usersDataService.getUsers().then(async users => {
       this.users = users;
+      this.users = await this.getUsersWithPostsData(users);
       this.params.api.setRowData(users);
     });
   }
@@ -40,20 +40,26 @@ export class UsersListingComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
+  onCellClicked(params) {
+    this.data$.next({...params.data});
+  }
+
   private initColumnDefs(): any[] {
     return [
       {headerName: 'ID', field: 'id', width: 40, sortable: false},
       {headerName: 'Name', field: 'name'},
       {headerName: 'Username', field: 'username'},
       {headerName: 'Email', field: 'email'},
-      {
-        colId: 'postCount',
-        headerName: 'Posts count',
-        cellRendererFramework: PostCountRendererComponent,
-        width: 50,
-        sortable: false
-      }
+      {headerName: 'Posts count', field: 'postCount', width: 70, sortable: false}
     ];
+  }
+
+  private async getUsersWithPostsData(users: User[]): Promise<User[]> {
+    const posts = await this.usersDataService.getPosts();
+    return users.map(user => {
+      user.postCount = posts.filter(post => post.userId === user.id).length;
+      return user;
+    });
   }
 
   private setQuickFilterValue() {

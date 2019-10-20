@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostCountRendererComponent } from './post-count-renderer.component';
+import { DetailsModalComponent } from './details-modal.component';
 
-describe('PostCountRendererComponent', () => {
-  let component: PostCountRendererComponent;
-  let fixture: ComponentFixture<PostCountRendererComponent>;
+describe('UserDetailsModalComponent', () => {
+  let component: DetailsModalComponent;
+  let fixture: ComponentFixture<DetailsModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostCountRendererComponent ]
+      declarations: [ DetailsModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostCountRendererComponent);
+    fixture = TestBed.createComponent(DetailsModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,9 +5,11 @@
       [pagination]="true"
       [defaultColDef]= "defaultColDef"
       [columnDefs]="columnDefs"
+      (cellClicked)='onCellClicked($event)'
       (gridSizeChanged)="onGridSizeChanged($event)"
       (gridReady)="onGreadReady($event)"
     >
     </ag-grid-angular>
   </div>
 </div>
+<app-details-modal [data]="data$ | async"></app-details-modal>
