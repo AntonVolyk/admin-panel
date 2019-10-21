@@ -4,7 +4,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {User} from '@shared/models/user';
 import {delay} from 'rxjs/operators';
 
-const USERS: User[] = [{ id: 1, username: 'admin', password: 'test', token: 'test-user-token'}];
+const USERS: User[] = [{ id: 1, name: 'admin', username: 'admin', password: 'test', token: 'test-user-token'}];
 const LOGIN_ERROR_MESSAGE = 'Username or password is incorrect';
 
 @Injectable()

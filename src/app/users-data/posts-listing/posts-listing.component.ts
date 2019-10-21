@@ -28,7 +28,7 @@ export class PostsListingComponent extends AbstractDataListing {
     return [
       {headerName: 'ID', field: 'id', width: 40, sortable: false},
       {headerName: 'Title', field: 'title'},
-      {headerName: 'Username', field: 'username'}
+      {headerName: 'User', field: 'username'}
     ];
   }
 
