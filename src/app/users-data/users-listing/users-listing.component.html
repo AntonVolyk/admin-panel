@@ -5,7 +5,7 @@
       [pagination]="true"
       [defaultColDef]= "defaultColDef"
       [columnDefs]="columnDefs"
-      (cellClicked)='onCellClicked($event)'
+      (cellClicked)="onCellClicked($event, showModalByClickFieldName)"
       (gridSizeChanged)="onGridSizeChanged($event)"
       (gridReady)="onGreadReady($event)"
     >

@@ -1,15 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {Post} from '@shared/models/post';
+import {AbstractDataListing} from '../models/abstract-data-listing';
+import {UsersDataService} from '../services/users-data.service';
 
 @Component({
   selector: 'app-posts-listing',
   templateUrl: './posts-listing.component.html',
   styleUrls: ['./posts-listing.component.scss']
 })
-export class PostsListingComponent implements OnInit {
+export class PostsListingComponent extends AbstractDataListing {
+  showModalByClickFieldName = 'title';
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(protected usersDataService: UsersDataService) {
+    super(usersDataService);
   }
 
+  onGreadReady(params) {
+    this.params = params;
+    this.params.api.sizeColumnsToFit();
+    this.usersDataService.getPosts().then(async posts => {
+      posts = await this.getPostsWithUserData(posts);
+      this.params.api.setRowData(posts);
+    });
+  }
+
+  initColumnDefs(): any[] {
+    return [
+      {headerName: 'ID', field: 'id', width: 40, sortable: false},
+      {headerName: 'Title', field: 'title'},
+      {headerName: 'Username', field: 'username'}
+    ];
+  }
+
+  private async getPostsWithUserData(posts: Post[]): Promise<Post[]> {
+    const users = await this.usersDataService.getUsers();
+    return posts.map(post => {
+      const postUser = users.find(user => post.userId === user.id);
+      if (postUser) {
+        post.username = postUser.name;
+      }
+      return post;
+    });
+  }
 }
