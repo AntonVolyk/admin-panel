@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {UsersDataService} from '../services/users-data.service';
+import {UsersDataService, NavigationTab} from '../services/users-data.service';
 import {User} from '@shared/models/user';
 import {AbstractDataListing} from '../models/abstract-data-listing';
 
+const TAB_NAME = NavigationTab.Users;
 @Component({
   selector: 'app-users-listing',
   templateUrl: './users-listing.component.html',
@@ -12,7 +13,7 @@ export class UsersListingComponent extends AbstractDataListing {
   showModalByClickFieldName = 'username';
 
   constructor(protected usersDataService: UsersDataService) {
-    super(usersDataService);
+    super(usersDataService, TAB_NAME);
   }
 
   onGreadReady(params) {

@@ -1,5 +1,5 @@
 import {BehaviorSubject, Subscription} from 'rxjs';
-import {UsersDataService} from '../services/users-data.service';
+import {UsersDataService, NavigationTab} from '../services/users-data.service';
 import {OnInit} from '@angular/core';
 
 export abstract class AbstractDataListing implements OnInit {
@@ -12,10 +12,11 @@ export abstract class AbstractDataListing implements OnInit {
   };
   data$ = new BehaviorSubject(null);
 
-  protected constructor(protected usersDataService: UsersDataService) {
+  protected constructor(protected usersDataService: UsersDataService, protected selectetTab: NavigationTab) {
   }
 
   ngOnInit() {
+    this.usersDataService.selectedTab$.next(this.selectetTab);
     this.columnDefs = this.initColumnDefs();
     this.subscription.add(this.setQuickFilterValue());
   }

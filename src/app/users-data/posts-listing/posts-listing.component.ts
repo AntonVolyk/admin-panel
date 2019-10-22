@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {Post} from '@shared/models/post';
 import {AbstractDataListing} from '../models/abstract-data-listing';
-import {UsersDataService} from '../services/users-data.service';
+import {UsersDataService, NavigationTab} from '../services/users-data.service';
+
+const TAB_NAME = NavigationTab.Posts;
 
 @Component({
   selector: 'app-posts-listing',
@@ -12,7 +14,7 @@ export class PostsListingComponent extends AbstractDataListing {
   showModalByClickFieldName = 'title';
 
   constructor(protected usersDataService: UsersDataService) {
-    super(usersDataService);
+    super(usersDataService, TAB_NAME);
   }
 
   onGreadReady(params) {

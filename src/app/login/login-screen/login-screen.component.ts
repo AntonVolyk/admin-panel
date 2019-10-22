@@ -36,6 +36,14 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  get username(): AbstractControl {
+    return this.loginForm.get('username');
+  }
+
+  get password(): AbstractControl {
+    return this.loginForm.get('password');
+  }
+
   onSubmit() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
@@ -56,13 +64,5 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
           this.isPending = false;
         }
       );
-  }
-
-  get username(): AbstractControl {
-    return this.loginForm.get('username');
-  }
-
-  get password(): AbstractControl {
-    return this.loginForm.get('password');
   }
 }
