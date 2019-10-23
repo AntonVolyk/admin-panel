@@ -4,6 +4,7 @@ import {User} from '@shared/models/user';
 import {AbstractDataListing} from '../models/abstract-data-listing';
 
 const TAB_NAME = NavigationTab.Users;
+
 @Component({
   selector: 'app-users-listing',
   templateUrl: './users-listing.component.html',

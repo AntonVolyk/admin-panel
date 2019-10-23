@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@shared/services/authentication.service';
-import {UsersDataService, NavigationTab} from '../services/users-data.service';
-import { Subscription, Observable } from 'rxjs';
+import {NavigationTab, UsersDataService} from '../services/users-data.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-users-data-listing',
   templateUrl: './users-data-listing.component.html',
   styleUrls: ['./users-data-listing.component.scss']
 })
-export class UsersDataListingComponent implements OnInit {
+export class UsersDataListingComponent implements OnInit, OnDestroy {
   selectedTab: NavigationTab;
   subscription = new Subscription();
 
@@ -28,6 +28,10 @@ export class UsersDataListingComponent implements OnInit {
     this.subscription.add(this.getSelectedTabSubsciption());
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   get isUsersTabSelected(): boolean {
     return this.selectedTab === NavigationTab.Users;
   }
@@ -37,15 +41,15 @@ export class UsersDataListingComponent implements OnInit {
   }
 
   onQuickFilterChanged(event) {
-    this.usersDataService.quickFilterValue.next(event.data);
+    this.usersDataService.quickFilterValue$.next(event.data);
   }
 
   onUsersNavigation() {
-    this.router.navigate(['./users'], {relativeTo: this.route});
+    this.router.navigate([`./${NavigationTab.Users}`], {relativeTo: this.route});
   }
 
   onPostsNavigation() {
-    this.router.navigate(['./posts'], {relativeTo: this.route});
+    this.router.navigate([`./${NavigationTab.Posts}`], {relativeTo: this.route});
   }
 
   onSignOut() {

@@ -5,10 +5,11 @@ import {environment} from '@environments/environment';
 import {Post} from '@shared/models/post';
 import {BehaviorSubject, Subject} from 'rxjs';
 
-export enum NavigationTab {Users, Posts}
+export enum NavigationTab {Users = 'users', Posts = 'posts'}
+
 @Injectable()
 export class UsersDataService {
-  quickFilterValue = new BehaviorSubject(null);
+  quickFilterValue$ = new BehaviorSubject(null);
   selectedTab$ = new Subject<NavigationTab>();
 
   constructor(private http: HttpClient) { }

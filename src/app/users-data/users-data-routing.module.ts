@@ -9,14 +9,8 @@ const usersDataRoutes: Routes = [
     path: '',
     component: UsersDataListingComponent,
     children: [
-      {
-        path: 'users',
-        component: UsersListingComponent,
-      },
-      {
-        path: 'posts',
-        component: PostsListingComponent,
-      }
+      { path: 'users', component: UsersListingComponent,  data: { selectedTab: 'users'}},
+      { path: 'posts', component: PostsListingComponent }
     ]
   }
 ];

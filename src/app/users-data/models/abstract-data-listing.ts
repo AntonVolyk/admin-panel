@@ -1,8 +1,8 @@
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {UsersDataService, NavigationTab} from '../services/users-data.service';
-import {OnInit} from '@angular/core';
+import {OnDestroy, OnInit} from '@angular/core';
 
-export abstract class AbstractDataListing implements OnInit {
+export abstract class AbstractDataListing implements OnInit, OnDestroy {
   params: any;
   columnDefs: any;
   subscription = new Subscription();
@@ -21,6 +21,10 @@ export abstract class AbstractDataListing implements OnInit {
     this.subscription.add(this.setQuickFilterValue());
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   abstract onGreadReady(params): void;
 
   abstract initColumnDefs(): any[];
@@ -35,8 +39,8 @@ export abstract class AbstractDataListing implements OnInit {
     }
   }
 
-  private setQuickFilterValue() {
-    this.usersDataService.quickFilterValue.subscribe(value => {
+  private setQuickFilterValue(): Subscription {
+    return this.usersDataService.quickFilterValue$.subscribe(value => {
       if (this.params) {
         this.params.api.setQuickFilter(value);
       }
